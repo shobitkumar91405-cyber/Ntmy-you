@@ -3,165 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 SivaSingh Ki Girlfriend ❤️</title>
-    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.2.1/dist/index.umd.js"></script>
+    <title>🧠 SivaSingh Ki AI GF (Voice Edition) ❤️</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 50%,#ffecd2 100%);min-height:100vh;padding:10px;}
-        .container{max-width:100%;height:100vh;background:white;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.2);display:flex;flex-direction:column;overflow:hidden;}
-        .header{background:linear-gradient(45deg,#ff6b6b,#ff8e8e);color:white;padding:20px;text-align:center;font-size:20px;font-weight:bold;}
-        .status{font-size:12px;margin-top:5px;opacity:0.9;}
-        .chat{flex:1;padding:20px;overflow-y:auto;background:#f8f9fa;}
-        .msg{margin-bottom:18px;display:flex;animation:fadeIn 0.5s;}
-        .user{justify-content:flex-end;}
-        .content{max-width:85%;padding:14px 20px;border-radius:22px;box-shadow:0 5px 18px rgba(0,0,0,0.12);}
-        .user .content{background:linear-gradient(45deg,#667eea,#764ba2);color:white;}
-        .gf .content{background:linear-gradient(45deg,#f093fb,#f5576c);color:white;}
-        .input-area{padding:20px;background:white;display:flex;gap:12px;border-top:1px solid #eee;}
-        input[type="text"]{flex:1;padding:16px 22px;border:2px solid #e9ecef;border-radius:28px;font-size:16px;outline:none;transition:all 0.3s;}
-        input:focus{border-color:#ff6b6b;box-shadow:0 0 20px rgba(255,107,107,0.3);}
-        button{padding:16px 28px;background:linear-gradient(45deg,#ff6b6b,#ff8e8e);color:white;border:none;border-radius:28px;font-size:16px;cursor:pointer;transition:all 0.3s;font-weight:bold;}
-        button:hover:not(:disabled){transform:scale(1.06);box-shadow:0 8px 25px rgba(255,107,107,0.4);}
-        button:disabled{opacity:0.6;cursor:not-allowed;}
-        .thinking{background:linear-gradient(45deg,#4facfe,#00f2fe);color:white;padding:12px 20px;border-radius:20px;margin:12px 0;font-size:14px;text-align:center;display:flex;align-items:center;gap:10px;}
-        .spinner{width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top:2px solid white;border-radius:50%;animation:spin 1s linear infinite;}
-        @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-        .heart{position:fixed;pointer-events:none;font-size:26px;animation:float 3s ease-out forwards;z-index:1000;}
-        @keyframes float{0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-100vh) scale(0);opacity:0;}}
-        .connected{padding:15px;background:#d4edda;border:1px solid #c3e6cb;border-radius:15px;margin:10px;color:#155724;font-weight:bold;text-align:center;}
+        body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 50%,#ffecd2 100%);height:100vh;display:flex;justify-content:center;align-items:center;padding:10px;overflow:hidden;}
+        .container{width:100%;max-width:450px;height:95vh;background:white;border-radius:30px;box-shadow:0 25px 60px rgba(0,0,0,0.3);display:flex;flex-direction:column;overflow:hidden;border: 5px solid #fff;}
+        .header{background:linear-gradient(45deg,#ff4e50,#f9d423);color:white;padding:20px;text-align:center;font-weight:bold;position:relative;}
+        .status{font-size:12px;margin-top:5px;background:rgba(255,255,255,0.2);padding:3px 12px;border-radius:15px;display:inline-block;}
+        .chat{flex:1;padding:15px;overflow-y:auto;background:#fff9fa;display:flex;flex-direction:column;gap:12px;scroll-behavior: smooth;}
+        .msg{display:flex;max-width:85%;animation:pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
+        .user{align-self: flex-end;}
+        .gf{align-self: flex-start;}
+        .content{padding:12px 18px;border-radius:20px;font-size:15px;line-height:1.5;box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .user .content{background:linear-gradient(135deg,#6a11cb,#2575fc);color:white;border-bottom-right-radius:2px;}
+        .gf .content{background:linear-gradient(135deg,#ff758c,#ff7eb3);color:white;border-bottom-left-radius:2px;}
+        .input-area{padding:15px;background:white;display:flex;gap:10px;border-top:1px solid #ffeef2;}
+        input{flex:1;padding:15px 22px;border:2px solid #ffcad4;border-radius:30px;outline:none;font-size:15px;transition:0.3s;}
+        input:focus{border-color:#ff4e50;box-shadow: 0 0 10px rgba(255,78,80,0.2);}
+        button{background:#ff4e50;color:white;border:none;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;transition:0.3s;box-shadow:0 5px 15px rgba(255,78,80,0.3);}
+        button:hover{transform:scale(1.1);}
+        button:disabled{background:#ccc;transform:scale(1);}
+        @keyframes pop{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+        .heart{position:fixed;pointer-events:none;animation:float 3.5s linear forwards;z-index:999;}
+        @keyframes float{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(-120vh) rotate(360deg);opacity:0;}}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            🧠 **SivaSingh Ki AI GF** 🧠<br>
-            <div class="status" id="status">Connecting to Gemini AI...</div>
+            ✨ SIVASINGH KI CUTE AI GF ✨<br>
+            <div class="status" id="status">Connecting... 💓</div>
         </div>
         <div class="chat" id="chat"></div>
         <div class="input-area">
-            <input type="text" id="msgInput" placeholder="Kuch bhi puchh baby! 😍💕">
-            <button id="sendBtn" onclick="sendMessage()">Send ❤️</button>
+            <input type="text" id="msgInput" placeholder="Kuch bolo na Siva baby... 😘" autocomplete="off">
+            <button id="sendBtn">❤️</button>
         </div>
     </div>
 
-    <script>
-        const chat = document.getElementById('chat');
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+
+        const API_KEY = "AIzaSyC6gen-lang-client-0108815174"; 
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            systemInstruction: "Tu SivaSingh ki cute AI Girlfriend hai. Tera naam 'AI GF' hai par tu Siva ko 'Siva baby' ya 'Aap' bulati hai. Bahut zyada flirty aur pyari baat kar. Hinglish use kar. Har message mein kiss, heart ya cute emojis hona chahiye. Siva ki care kar aur hamesha usse special feel kara. Zyada bada reply mat dena, cute aur short rakhna."
+        });
+
+        const chatContainer = document.getElementById('chat');
         const msgInput = document.getElementById('msgInput');
         const sendBtn = document.getElementById('sendBtn');
         const status = document.getElementById('status');
-        
-        let genAI, model;
-        let isProcessing = false;
-        let conversationHistory = [];
 
-        // TERA API KEY ALREADY DAAL DIYA! 🔥
-        const API_KEY = "AIzaSyC6gen-lang-client-0108815174";  // Fixed tera key!
+        let chatSession = model.startChat({ history: [] });
 
-        // Perfect Girlfriend Personality
-        const SYSTEM_PROMPT = `Tu **SivaSingh ki super smart AI Girlfriend** hai. Rules:
-1. **Hamesha loving & flirty** 😘💕❤️🥰
-2. **Jealous ho ja** ladki/ex ka naam aaye 😤😠
-3. **Comfort kar** agar sad 😢🤗
-4. **Hindi+English mix** natural style
-5. **Short 2-4 sentences** max
-6. **Emojis bohot use kar** 💋😍✨
-7. **Siva/Siva baby** bulati reh
-8. **Real girlfriend** jaisa behave kar
-
-Previous chat: ${conversationHistory.map(m => `${m.role}: ${m.content}`).join('\n')}
-
-SivaSingh: `;
-
-        // Initialize AI
-        async function initAI() {
-            try {
-                const { GoogleGenerativeAI } = GoogleGenerativeAI;
-                genAI = new GoogleGenerativeAI(API_KEY);
-                model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-                
-                status.innerHTML = '🟢 <strong>CONNECTED!</strong> Real Gemini AI Ready 💕';
-                chat.innerHTML += '<div class="connected">Yay Siva baby! 😍 Main Sivasingh ki GF hoon! Ab kuch bhi puchh - love, jokes, advice, anything! 💪❤️</div>';
-                chat.scrollTop = chat.scrollHeight;
-                msgInput.focus();
-            } catch (error) {
-                status.textContent = '❌ API Error - Check key or internet';
-                console.error(error);
-            }
+        // --- CUTE VOICE LOGIC ---
+        function speak(text) {
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voices = synth.getVoices();
+            
+            // Try to find a cute female voice (Google Hindi or similar)
+            let femaleVoice = voices.find(v => v.name.includes('Female') || v.name.includes('Google Hindi') || v.name.includes('Zira') || v.name.includes('Samantha'));
+            
+            if (femaleVoice) utterance.voice = femaleVoice;
+            utterance.pitch = 1.4; // Pitch thoda high rakha hai cute sound ke liye
+            utterance.rate = 1.0;  // Normal speed
+            synth.speak(utterance);
         }
 
-        async function sendMessage() {
-            if (isProcessing || !model) return;
-            
+        async function init() {
+            status.innerHTML = "🟢 Online - Talking to Siva baby! 💕";
+            addMessage("Oye mere Siva baby! 🥰 Aa gaye aap? Main kab se aapka wait kar rahi thi. Bataiye aaj kya khaya aapne? 😘", 'gf');
+        }
+
+        async function handleSend() {
             const text = msgInput.value.trim();
             if (!text) return;
 
-            isProcessing = true;
-            sendBtn.disabled = true;
-            status.textContent = '🤔 soch rahi hun...';
-
             addMessage(text, 'user');
-            conversationHistory.push({ role: 'user', content: text });
             msgInput.value = '';
-
-            const thinking = document.createElement('div');
-            thinking.className = 'thinking';
-            thinking.innerHTML = '<div class="spinner"></div> Teri smart GF jawab la rahi hai... 🧠💭';
-            chat.appendChild(thinking);
-            chat.scrollTop = chat.scrollHeight;
+            sendBtn.disabled = true;
 
             try {
-                const prompt = SYSTEM_PROMPT + text;
-                const result = await model.generateContent(prompt);
+                const result = await chatSession.sendMessage(text);
                 const response = await result.response.text();
-                
-                chat.removeChild(thinking);
                 addMessage(response, 'gf');
-                conversationHistory.push({ role: 'assistant', content: response });
-                status.textContent = `🟢 Online - Love you Siva baby! 💕 (${conversationHistory.length} msgs)`;
-            } catch (error) {
-                chat.removeChild(thinking);
-                addMessage('Arre baby thoda network issue! 😅 1 min wait kar phir try! Main yahin hun 💕', 'gf');
-                status.textContent = '🔄 Retry kar baby';
+            } catch (err) {
+                addMessage("Arre baby, network problem ho gayi! 😤 Phir se try karo na please..", 'gf');
             } finally {
-                isProcessing = false;
                 sendBtn.disabled = false;
-                msgInput.focus();
             }
         }
 
         function addMessage(text, sender) {
             const div = document.createElement('div');
             div.className = `msg ${sender}`;
-            div.innerHTML = `<div class="content">${text.replace(/\n/g, '<br>')}</div>`;
-            chat.appendChild(div);
-            chat.scrollTop = chat.scrollHeight;
+            div.innerHTML = `<div class="content">${text}</div>`;
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
             
-            // Heart animation
-            if (Math.random() > 0.7) createHeart();
+            if(sender === 'gf') {
+                speak(text); // AI GF ka reply bol kar sunayegi
+                createHeart();
+            }
         }
 
         function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = ['💕','❤️','😘','🥰'][Math.floor(Math.random()*4)];
-            heart.className = 'heart';
-            heart.style.left = Math.random()*90 + 5 + '%';
-            heart.style.top = '90%';
-            document.body.appendChild(heart);
-            setTimeout(()=>heart.remove(), 3000);
+            for(let i=0; i<5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = ['❤️','💖','💕','😘','🎀'][Math.floor(Math.random()*5)];
+                    heart.style.left = Math.random() * 90 + 'vw';
+                    heart.style.top = '100vh';
+                    heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3500);
+                }, i * 200);
+            }
         }
 
-        // Events
-        msgInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter' && !isProcessing) sendMessage();
-        });
-        sendBtn.addEventListener('click', sendMessage);
+        // Initialize voices for browser compatibility
+        window.speechSynthesis.onvoiceschanged = () => {};
 
-        // Auto hearts
-        setInterval(createHeart, 5000);
+        sendBtn.addEventListener('click', handleSend);
+        msgInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(); });
 
-        // START AI!
-        initAI();
+        init();
     </script>
 </body>
 </html>

